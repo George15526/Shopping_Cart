@@ -49,36 +49,53 @@ class ShoppingCart:
     #         print(f"\n剩餘餘額: ${self.user_balance}")
     #     else:
     #         print("\n餘額不足")
+    
+    def delete_items_in_cart(self, product_id):
+        flag = False
+        for i in range(0, len(self.shopping_cart)):
+            if self.shopping_cart[i]['id'] == product_id:
+                delete_item = self.shopping_cart.pop(i)
+                flag = True
+                break
+        if flag is True:
+            print(f"\n{delete_item['name']} 已從購物車移除。")
+        else:
+            print("\n商品不在購物車中。")
 
 if __name__ == '__main__':
     cart = ShoppingCart()
 
     while True:
-      print("\n選項:\n")
-      print("1. 加入商品到購物車")
-      print("2. 顯示購物車內容")
-      print("3. 付款")
-      print("4. 離開")
-    #   print("5. 查看餘額")
+        print("\n選項:\n")
+        print("1. 加入商品到購物車")
+        print("2. 顯示購物車內容")
+        print("3. 付款")
+        print("4. 離開")
+        # print("5. 查看餘額")
+        print("6. 移除購物車內商品")
 
-      choice = input("\n請輸入選項 (1/2/3/4): ")
+        choice = input("\n請輸入選項 (1/2/3/4/6): ")
 
-      if choice == "1":
-          product_id = int(input("\n請輸入要加入購物車的商品編號: "))
-          cart.add_to_cart(product_id)
+        if choice == "1":
+            product_id = int(input("\n請輸入要加入購物車的商品編號: "))
+            cart.add_to_cart(product_id)
 
-      elif choice == "2":
-          cart.view_cart()
+        elif choice == "2":
+            cart.view_cart()
 
-      elif choice == "3":
-          cart.checkout()
+        elif choice == "3":
+            cart.checkout()
 
-      elif choice == "4":
-          print("\n謝謝光臨，再見！")
-          break
+        elif choice == "4":
+            print("\n謝謝光臨，再見！")
+            break
 
-    #   elif choice == "5":
-    #       cart.checkBalance()
+        #   elif choice == "5":
+        #       cart.checkBalance()
+        
+        elif choice == "6":
+            product_id = int(input("\n請輸入要移除的商品編號: "))
+            cart.delete_items_in_cart(product_id)
 
-      else:
-          print("\n無效的選項，請重新輸入。")
+        else:
+            print("\n無效的選項，請重新輸入。")

@@ -119,6 +119,21 @@ class TestShoppingCart(unittest.TestCase):
     #     sys.stdout = sys.__stdout__
 
     #     self.assertEqual(actual_output, expected_output)
+    
+    def test_delete_items_in_cart(self):
+        cart = self.cart
+        cart.shopping_cart.append({"id": 1, **cart.products[1]})
+        cart.shopping_cart.append({"id": 2, **cart.products[2]})
+        product_id = 1
+        expected_output = "\n商品1 已從購物車移除。\n"
+
+        sys.stdout = StringIO()
+        cart.delete_items_in_cart(product_id)
+        actual_output = sys.stdout.getvalue()
+        sys.stdout = sys.__stdout__
+
+        self.assertEqual(actual_output, expected_output)
+        self.assertNotIn(product_id, [item['id'] for item in cart.shopping_cart])
 
 if __name__ == '__main__':
     unittest.main()
